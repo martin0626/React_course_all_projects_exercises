@@ -1,0 +1,67 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+  position: fixed;
+  top: 30vh;
+  left: 10%;
+  width: 80%;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.header {
+  background: #4f005f;
+  padding: 1rem;
+}
+
+.header h2 {
+  margin: 0;
+  color: white;
+}
+
+.content {
+  padding: 1rem;
+}
+
+.actions {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3.2rem 0;
+  background-color: #fff;
+  padding: 1.4rem;
+  margin: 0 12rem;
+  border-radius: 8px;
+  text-align: start;
+  margin-bottom: 1.2rem;
+}
+
+.button {
+  background: rgb(117, 50, 103);
+  color: #fff;
+  align-self: start;
+  padding: 0.3rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    left: calc(50% - 20rem);
+    width: 40rem;
+  }
+}
