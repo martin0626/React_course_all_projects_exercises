@@ -1,30 +1,25 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./Form.css";
 import ErrorModal from "../UI/ErrorModal";
 
 const UserForm = (props) => {
-  let [username, setUsername] = useState("");
-  let [age, setAge] = useState("");
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
   let [error, setError] = useState("");
 
-  const usernameHandler = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const ageHandler = (event) => {
-    setAge(event.target.value);
-  };
-
   const submitHandler = (event) => {
+    let enteredName = nameInputRef.current.value;
+    let enteredAge = ageInputRef.current.value;
+
     event.preventDefault();
-    if (username.trim().length === 0 || age.trim().length === 0) {
+    if (enteredName.trim().length === 0 || enteredAge.trim().length === 0) {
       setError({
         title: "Error",
         content: "Please fill all fields",
       });
       return;
     }
-    if (+age < 0) {
+    if (+enteredAge < 0) {
       setError({
         title: "Greater Than",
         content: "Age must be greater than 0",
@@ -34,13 +29,13 @@ const UserForm = (props) => {
 
     let user = {
       key: Math.random(),
-      username: username,
-      age: age,
+      username: enteredName,
+      age: enteredAge,
     };
 
-    setUsername("");
-    setAge("");
     props.addUser(user);
+    nameInputRef.current.value = "";
+    ageInputRef.current.value = "";
   };
 
   const errorHandler = () => {
@@ -61,11 +56,11 @@ const UserForm = (props) => {
         <form className="form" onSubmit={submitHandler}>
           <div className="input-obj">
             <label>Username</label>
-            <input onChange={usernameHandler} value={username}></input>
+            <input ref={nameInputRef}></input>
           </div>
           <div className="input-obj">
             <label>Age (Years)</label>
-            <input type="number" onChange={ageHandler} value={age}></input>
+            <input type="number" ref={ageInputRef}></input>
           </div>
           <button>Add User</button>
         </form>

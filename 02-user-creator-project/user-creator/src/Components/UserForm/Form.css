@@ -23,11 +23,13 @@
 .input-obj label {
   align-self: start;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .input-obj input {
   border: 1px solid rgb(181, 181, 181);
   transition: all 4s;
+  font-size: 18px;
 }
 
 .input-obj input:focus {
