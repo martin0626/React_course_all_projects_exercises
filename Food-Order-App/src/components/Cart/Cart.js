@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import MealItem from "../Meals/MealItems/MealItem";
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
@@ -19,19 +20,29 @@ let CART_ITEMS = [
 
 let Cart = (props) => {
   return (
-    <Modal>
-      <ul>
-        <MealItem meals={CART_ITEMS} />
-      </ul>
-      <div className={classes.actions}>
-        <span>Total amount</span>
-        <span>35.62</span>
-      </div>
-      <div className={classes.actions}>
-        <button className={classes["button--alt"]}>Close</button>
-        <button className={classes.button}>Order</button>
-      </div>
-    </Modal>
+    <Fragment>
+      {props.isOpenCart && (
+        <Modal cartHandler={props.cartHandler}>
+          <ul>
+            <MealItem meals={CART_ITEMS} />
+          </ul>
+          <div className={classes.actions}>
+            <span>Total amount</span>
+            <span>35.62</span>
+          </div>
+          <div className={classes.actions}>
+            <button
+              onClick={props.cartHandler}
+              className={classes["button--alt"]}
+            >
+              Close
+            </button>
+            <button className={classes.button}>Order</button>
+          </div>
+        </Modal>
+      )}
+      )
+    </Fragment>
   );
 };
 

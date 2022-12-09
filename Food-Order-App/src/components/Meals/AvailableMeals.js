@@ -1,3 +1,4 @@
+import { useReducer, useState } from "react";
 import Card from "../UI/Card";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItems/MealItem";
@@ -29,12 +30,30 @@ const DUMMY_MEALS = [
   },
 ];
 
-const AvailableMeals = () => {
+const productsReducer = (state, action) => {
+  if (!action.products.incudes(action.addedProduct)) {
+    action.products.unshift(action.addedProduct);
+  }
+
+  return state;
+};
+
+const AvailableMeals = (props) => {
+  const [addedProducts, dispatchAdddedProducts] = useReducer(productsReducer, {
+    currentProduct: "",
+    products: [],
+  });
+
+  let onAddProduct = (id, count) => {
+    // TODO Add Products To addedProducts
+    console.log(id, count);
+  };
+
   return (
     <section className={classes.meals}>
       <Card>
         <ul>
-          <MealItem meals={DUMMY_MEALS} />
+          <MealItem addMealHandler={onAddProduct} meals={DUMMY_MEALS} />
         </ul>
       </Card>
     </section>

@@ -1,10 +1,19 @@
+import { useState } from "react";
 import InputField from "../../UI/Input";
 import classes from "./MealItemForm.module.css";
 
 const MealItemForm = (props) => {
+  const [countMeals, setCountMeals] = useState(0);
+
+  let submitHandler = (e) => {
+    e.preventDefault();
+    props.addMealHandler(props.id, countMeals);
+  };
+
   return (
-    <form className={classes.form}>
+    <form onSubmit={submitHandler} className={classes.form}>
       <InputField
+        setCount={setCountMeals}
         label="Amount"
         input={{
           id: props.id,

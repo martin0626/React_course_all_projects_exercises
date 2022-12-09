@@ -1,11 +1,11 @@
-import react, { Fragment } from "react";
+import react, { Fragment, useState } from "react";
 import CartIcon from "./CartIcon";
 import classes from "./CartButton.module.css";
 
 const CartButton = (props) => {
   return (
     <Fragment>
-      <button className={classes.button}>
+      <button onClick={props.cartHandler} className={classes.button}>
         <span>
           <CartIcon />
         </span>
