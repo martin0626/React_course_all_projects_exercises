@@ -1,34 +1,22 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import CartContext from "../../store/cart-context";
 import MealItem from "../Meals/MealItems/MealItem";
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
 
-let CART_ITEMS = [
-  {
-    id: "m2",
-    name: "Schnitzel",
-    description: "A german specialty!",
-    price: 16.5,
-  },
-  {
-    id: "m3",
-    name: "Barbecue Burger",
-    description: "American, raw, meaty",
-    price: 12.99,
-  },
-];
-
 let Cart = (props) => {
+  const cartCtx = useContext(CartContext);
+
   return (
     <Fragment>
       {props.isOpenCart && (
         <Modal cartHandler={props.cartHandler}>
           <ul>
-            <MealItem meals={CART_ITEMS} />
+            <MealItem meals={cartCtx.items} />
           </ul>
-          <div className={classes.actions}>
+          <div className={classes.total}>
             <span>Total amount</span>
-            <span>35.62</span>
+            <span>{cartCtx.totalAmount}</span>
           </div>
           <div className={classes.actions}>
             <button

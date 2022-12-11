@@ -3,7 +3,7 @@ import InputField from "../../UI/Input";
 import classes from "./MealItemForm.module.css";
 
 const MealItemForm = (props) => {
-  const [countMeals, setCountMeals] = useState(0);
+  const [countMeals, setCountMeals] = useState(1);
 
   let submitHandler = (e) => {
     e.preventDefault();

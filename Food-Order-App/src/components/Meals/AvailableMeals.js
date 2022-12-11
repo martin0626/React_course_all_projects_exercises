@@ -1,4 +1,5 @@
-import { useReducer, useState } from "react";
+import { useReducer, useContext } from "react";
+import CartContext from "../../store/cart-context";
 import Card from "../UI/Card";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItems/MealItem";
@@ -30,23 +31,14 @@ const DUMMY_MEALS = [
   },
 ];
 
-const productsReducer = (state, action) => {
-  if (!action.products.incudes(action.addedProduct)) {
-    action.products.unshift(action.addedProduct);
-  }
-
-  return state;
-};
-
 const AvailableMeals = (props) => {
-  const [addedProducts, dispatchAdddedProducts] = useReducer(productsReducer, {
-    currentProduct: "",
-    products: [],
-  });
+  const cartCtx = useContext(CartContext);
 
   let onAddProduct = (id, count) => {
-    // TODO Add Products To addedProducts
-    console.log(id, count);
+    let product = DUMMY_MEALS.find((el) => el.id === id);
+    product.count = count;
+    cartCtx.addItem(product);
+    console.log(cartCtx.items);
   };
 
   return (

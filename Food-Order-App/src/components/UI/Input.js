@@ -1,8 +1,8 @@
 import classes from "./Input.module.css";
 
 const InputField = (props) => {
-  const inputHandler = () => {
-    props.setCount(2);
+  const inputHandler = (event) => {
+    props.setCount(Number(event.target.value));
   };
 
   return (
