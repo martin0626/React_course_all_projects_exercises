@@ -1,22 +1,42 @@
 import { Fragment, useContext } from "react";
 import CartContext from "../../store/cart-context";
-import MealItem from "../Meals/MealItems/MealItem";
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
+import CartItem from "./CartItem";
 
 let Cart = (props) => {
   const cartCtx = useContext(CartContext);
+  let haveItems = cartCtx.items.length > 0;
+
+  const addItemHandler = (item) => {
+    console.log(item);
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
+
+  const removeItemHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
+
+  const cartItems = cartCtx.items.map((item) => {
+    return (
+      <CartItem
+        name={item.name}
+        price={item.price}
+        amount={item.amount}
+        onAdd={addItemHandler.bind(null, item)}
+        onRemove={removeItemHandler.bind(null, item.id)}
+      ></CartItem>
+    );
+  });
 
   return (
     <Fragment>
       {props.isOpenCart && (
         <Modal cartHandler={props.cartHandler}>
-          <ul>
-            <MealItem meals={cartCtx.items} />
-          </ul>
+          <ul className={classes["cart-items"]}>{cartItems}</ul>
           <div className={classes.total}>
             <span>Total amount</span>
-            <span>{cartCtx.totalAmount}</span>
+            <span>${cartCtx.totalAmount.toFixed(2)}</span>
           </div>
           <div className={classes.actions}>
             <button
@@ -25,7 +45,8 @@ let Cart = (props) => {
             >
               Close
             </button>
-            <button className={classes.button}>Order</button>
+
+            {haveItems && <button className={classes.button}>Order</button>}
           </div>
         </Modal>
       )}

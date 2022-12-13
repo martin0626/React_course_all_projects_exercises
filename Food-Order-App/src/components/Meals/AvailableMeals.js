@@ -1,4 +1,4 @@
-import { useReducer, useContext } from "react";
+import { useContext } from "react";
 import CartContext from "../../store/cart-context";
 import Card from "../UI/Card";
 import classes from "./AvailableMeals.module.css";
@@ -34,11 +34,10 @@ const DUMMY_MEALS = [
 const AvailableMeals = (props) => {
   const cartCtx = useContext(CartContext);
 
-  let onAddProduct = (id, count) => {
-    let product = DUMMY_MEALS.find((el) => el.id === id);
-    product.count = count;
-    cartCtx.addItem(product);
-    console.log(cartCtx.items);
+  let onAddProduct = (id, amount) => {
+    let item = DUMMY_MEALS.find((el) => el.id === id);
+    item.amount = amount;
+    cartCtx.addItem(item);
   };
 
   return (
