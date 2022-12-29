@@ -1,10 +1,12 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useState } from "react";
 import CartContext from "../../store/cart-context";
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
+import Checkout from "./Checkout/checkout";
 
 let Cart = (props) => {
+  let [isVisibleForm, setVisibleForm] = useState(false);
   const cartCtx = useContext(CartContext);
   let haveItems = cartCtx.items.length > 0;
 
@@ -29,6 +31,14 @@ let Cart = (props) => {
     );
   });
 
+  let visibleFormHandler = () => {
+    if (isVisibleForm) {
+      setVisibleForm(false);
+    } else {
+      setVisibleForm(true);
+    }
+  };
+
   return (
     <Fragment>
       {props.isOpenCart && (
@@ -39,15 +49,36 @@ let Cart = (props) => {
             <span>${cartCtx.totalAmount.toFixed(2)}</span>
           </div>
           <div className={classes.actions}>
-            <button
-              onClick={props.cartHandler}
-              className={classes["button--alt"]}
-            >
-              Close
-            </button>
+            {!isVisibleForm && (
+              <div>
+                {haveItems && (
+                  <button
+                    onClick={visibleFormHandler}
+                    className={classes.button}
+                  >
+                    Order
+                  </button>
+                )}
 
-            {haveItems && <button className={classes.button}>Order</button>}
+                <button
+                  onClick={() => {
+                    props.cartHandler();
+                  }}
+                  className={classes["button--alt"]}
+                >
+                  Close
+                </button>
+              </div>
+            )}
+
+            {/* {haveItems && <button className={classes.button}>Order</button>} */}
           </div>
+          {isVisibleForm && (
+            <Checkout
+              onCancel={props.cartHandler}
+              visibleFormHandler={visibleFormHandler}
+            />
+          )}
         </Modal>
       )}
       )

@@ -35,37 +35,37 @@ const AvailableMeals = (props) => {
   const cartCtx = useContext(CartContext);
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  let fetchMeals = useCallback(async () => {
-    setLoading(true);
-    try {
-      let request = await fetch(
-        "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Meals.json"
-      );
-
-      let response = await request.json();
-
-      let mealsItems = [];
-
-      for (let key in response) {
-        mealsItems.push({
-          id: key,
-          name: response[key].name,
-          description: response[key].description,
-          price: response[key].price,
-        });
-      }
-      setMeals(mealsItems);
-    } catch {
-      return {};
-    }
-
-    setLoading(false);
-  }, []);
+  const [isError, setError] = useState(false);
 
   useEffect(() => {
+    let fetchMeals = async () => {
+      setLoading(true);
+      try {
+        let request = await fetch(
+          "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Meals.json"
+        );
+
+        let response = await request.json();
+
+        let mealsItems = [];
+
+        for (let key in response) {
+          mealsItems.push({
+            id: key,
+            name: response[key].name,
+            description: response[key].description,
+            price: response[key].price,
+          });
+        }
+        setMeals(mealsItems);
+        setError(false);
+      } catch {
+        setError("Problem with meals!");
+      }
+      setLoading(false);
+    };
     fetchMeals();
-  }, [fetchMeals]);
+  }, []);
 
   let onAddProduct = (id, amount) => {
     let item = meals.find((el) => el.id === id);
@@ -74,17 +74,25 @@ const AvailableMeals = (props) => {
     cartCtx.addItem(item);
   };
 
+  if (isError !== false) {
+    return (
+      <section className={classes.meals}>
+        <Card>
+          {loading && <h1>Loading...</h1>}
+          <p className={classes["error-msg"]}>{isError}</p>
+        </Card>
+      </section>
+    );
+  }
+
   return (
     <section className={classes.meals}>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <Card>
-          <ul>
-            <MealItem addMealHandler={onAddProduct} meals={meals} />
-          </ul>
-        </Card>
-      )}
+      {loading && <h1>Loading...</h1>}
+      <Card>
+        <ul>
+          <MealItem addMealHandler={onAddProduct} meals={meals} />
+        </ul>
+      </Card>
     </section>
   );
 };

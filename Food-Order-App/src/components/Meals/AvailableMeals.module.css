@@ -22,3 +22,9 @@
     transform: translateY(0);
   }
 }
+
+.error-msg {
+  text-align: center;
+  color: rgb(194, 92, 92);
+  font-weight: bolder;
+}
