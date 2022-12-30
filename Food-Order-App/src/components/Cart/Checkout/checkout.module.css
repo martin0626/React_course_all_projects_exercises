@@ -62,3 +62,19 @@
   border-color: #aa0b20;
   background-color: #ffeff1;
 }
+
+.error-msg {
+  color: #ca3e51;
+  margin-bottom: 0;
+}
+
+.actions .disabled-btn {
+  border: 1px solid #250a00;
+  background-color: #000000;
+  color: rgb(147, 147, 147);
+}
+
+.actions .disabled-btn:hover {
+  background-color: #000000;
+  cursor: not-allowed;
+}
