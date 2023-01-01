@@ -57,23 +57,14 @@ const productsReducer = (state, action) => {
     };
   }
 
+  if (action.type === "RESET") {
+    return {
+      items: [],
+      totalAmount: 0,
+    };
+  }
   return defaultCartState;
 };
-// if (action.type === "REMOVE") {
-//   let product = state.products.find((el) => el.id === action.removeId);
-//   if (product.count === 1) {
-//     state.totalAmount -= product.price;
-//     state.products = state.products.filter((el) => el.id !== action.removeId);
-//   } else {
-//     product.count -= 1;
-//     state.totalAmount -= product.price;
-//   }
-// }
-// return {
-//   items: state.products,
-//   totalAmount: state.totalAmount,
-// };
-// };
 
 const CartProvider = (props) => {
   const [addedProducts, dispatchAdddedProducts] = useReducer(
@@ -89,11 +80,16 @@ const CartProvider = (props) => {
     dispatchAdddedProducts({ id: id, type: "REMOVE" });
   };
 
+  const ResetProductsHandler = (id) => {
+    dispatchAdddedProducts({ type: "RESET" });
+  };
+
   const currentContext = {
     items: addedProducts.items,
     totalAmount: addedProducts.totalAmount,
     addItem: AddProductHandler,
     removeItem: RemoveProductHandler,
+    resetItems: ResetProductsHandler,
   };
   return (
     <CartContext.Provider value={currentContext}>

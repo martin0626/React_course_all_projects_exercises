@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useHttp from "../../../hooks/use-http";
 import classes from "./checkout.module.css";
 
@@ -50,7 +49,7 @@ const Checkout = (props) => {
     formIsValid = true;
   }
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     if (!cityIsValid | !nameIsValid | !streetIsValid | !postalCodeIsValid) {
@@ -63,8 +62,28 @@ const Checkout = (props) => {
       return;
     }
 
-    console.log(name, street, postalCode, city);
+    let userData = {
+      name: name,
+      street: street,
+      postalCode: postalCode,
+      city: city,
+    };
+
     formIsValid = false;
+    props.setSendRequest(true);
+    let request = await fetch(
+      "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          user: userData,
+          orderedItems: props.cartItems,
+        }),
+      }
+    );
+    props.setSendRequest(false);
+    props.setIsReadyRequest(true);
+    props.resetItems();
 
     nameReset();
     streetReset();

@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import CartContext from "../../store/cart-context";
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
@@ -7,6 +7,9 @@ import Checkout from "./Checkout/checkout";
 
 let Cart = (props) => {
   let [isVisibleForm, setVisibleForm] = useState(false);
+  let [isSendingRequest, setSendRequest] = useState(false);
+  let [isReadyRequest, setIsReadyRequest] = useState(false);
+
   const cartCtx = useContext(CartContext);
   let haveItems = cartCtx.items.length > 0;
 
@@ -39,46 +42,93 @@ let Cart = (props) => {
     }
   };
 
+  let cartProducts = {
+    products: cartCtx.items,
+    totalAmount: cartCtx.totalAmount,
+  };
+
+  let cartContent = (
+    <Fragment>
+      <ul className={classes["cart-items"]}>{cartItems}</ul>
+      <div className={classes.total}>
+        <span>Total amount</span>
+        <span>${cartCtx.totalAmount.toFixed(2)}</span>
+      </div>
+      <div className={classes.actions}>
+        {!isVisibleForm && (
+          <div>
+            {haveItems && (
+              <button onClick={visibleFormHandler} className={classes.button}>
+                Order
+              </button>
+            )}
+
+            <button
+              onClick={() => {
+                props.cartHandler();
+              }}
+              className={classes["button--alt"]}
+            >
+              Close
+            </button>
+          </div>
+        )}
+
+        {/* {haveItems && <button className={classes.button}>Order</button>} */}
+      </div>
+      {isVisibleForm && (
+        <Checkout
+          resetItems={cartCtx.resetItems}
+          setSendRequest={setSendRequest}
+          setIsReadyRequest={setIsReadyRequest}
+          cartItems={cartProducts}
+          onCancel={props.cartHandler}
+          visibleFormHandler={visibleFormHandler}
+        />
+      )}
+    </Fragment>
+  );
+
+  let sendingRequest = (
+    <Fragment>
+      <p>Working on your order!</p>
+      <button
+        onClick={() => {
+          props.cartHandler();
+          setIsReadyRequest(false);
+          visibleFormHandler();
+        }}
+        className={classes["button--alt"]}
+      >
+        Close
+      </button>
+    </Fragment>
+  );
+  let successfullSend = (
+    <Fragment>
+      <p>Your order is confirmed. Thank you!</p>
+      <div className={classes.actions}>
+        <button
+          onClick={() => {
+            props.cartHandler();
+            setIsReadyRequest(false);
+            visibleFormHandler();
+          }}
+          className={classes.button}
+        >
+          Close
+        </button>
+      </div>
+    </Fragment>
+  );
+
   return (
     <Fragment>
       {props.isOpenCart && (
         <Modal cartHandler={props.cartHandler}>
-          <ul className={classes["cart-items"]}>{cartItems}</ul>
-          <div className={classes.total}>
-            <span>Total amount</span>
-            <span>${cartCtx.totalAmount.toFixed(2)}</span>
-          </div>
-          <div className={classes.actions}>
-            {!isVisibleForm && (
-              <div>
-                {haveItems && (
-                  <button
-                    onClick={visibleFormHandler}
-                    className={classes.button}
-                  >
-                    Order
-                  </button>
-                )}
-
-                <button
-                  onClick={() => {
-                    props.cartHandler();
-                  }}
-                  className={classes["button--alt"]}
-                >
-                  Close
-                </button>
-              </div>
-            )}
-
-            {/* {haveItems && <button className={classes.button}>Order</button>} */}
-          </div>
-          {isVisibleForm && (
-            <Checkout
-              onCancel={props.cartHandler}
-              visibleFormHandler={visibleFormHandler}
-            />
-          )}
+          {!isSendingRequest && !isReadyRequest && cartContent}
+          {isSendingRequest && sendingRequest}
+          {isReadyRequest && successfullSend}
         </Modal>
       )}
       )
