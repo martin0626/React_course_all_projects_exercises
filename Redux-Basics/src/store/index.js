@@ -1,42 +1,6 @@
-import { createStore } from "redux";
-import { configureStore, createSlice } from "@reduxjs/toolkit";
-
-let counterDefaultState = { counter: 0, showCounter: true };
-let counterSlice = createSlice({
-  name: "counter",
-  initialState: counterDefaultState,
-  reducers: {
-    increment(state) {
-      state.counter++;
-    },
-    decrement(state) {
-      state.counter--;
-    },
-    increase(state, action) {
-      state.counter = state.counter + action.payload;
-    },
-    toggleCounter(state) {
-      state.showCounter = !state.showCounter;
-    },
-  },
-});
-
-let authDefaultState = {
-  isLoggedIn: false,
-};
-
-let authSlice = createSlice({
-  name: "auth",
-  initialState: authDefaultState,
-  reducers: {
-    login(state) {
-      state.isLoggedIn = true;
-    },
-    logout(state) {
-      state.isLoggedIn = false;
-    },
-  },
-});
+import { configureStore } from "@reduxjs/toolkit";
+import counterSlice from "./counter";
+import authSlice from "./auth";
 
 const store = configureStore({
   reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
@@ -44,6 +8,7 @@ const store = configureStore({
 
 export const counterActions = counterSlice.actions;
 export const authActions = authSlice.actions;
+export default store;
 
 // let counterReducer = (state = counterDefaultState, action) => {
 //   if (action.type === "Increment") {
@@ -77,5 +42,3 @@ export const authActions = authSlice.actions;
 // };
 
 // const store = createStore(counterReducer);
-
-export default store;
