@@ -12,7 +12,7 @@ function App() {
   // TODO FINISH Notification Functionality
   let isCartOpen = useSelector((state) => state.cart.isOpen);
   let cart = useSelector((state) => state.cart.items);
-  let notification = useSelector((state) => state.ui);
+  let notification = useSelector((state) => state.ui.notification);
   let dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,6 +61,7 @@ function App() {
       );
     });
   }, [cart, dispatch]);
+
   return (
     <Fragment>
       {notification && (
