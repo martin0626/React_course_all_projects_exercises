@@ -4,12 +4,18 @@ let defaultState = {
   isOpen: false,
   items: [],
   totalQuantity: 0,
+  isChanged: false,
 };
 
 let cartSlice = createSlice({
   name: "cart",
   initialState: defaultState,
   reducers: {
+    replaceCart(state, action) {
+      state.totalQuantity = action.payload.totalQuantity;
+      state.items = action.payload.items;
+      state.isChanged = false;
+    },
     changeView(state) {
       state.isOpen = !state.isOpen;
     },
@@ -33,6 +39,7 @@ let cartSlice = createSlice({
         state.items.push(newItem);
         state.totalQuantity++;
       }
+      state.isChanged = true;
     },
     decrease(state, action) {
       let item = state.items.find((el) => el.id === action.payload.id);
@@ -43,6 +50,7 @@ let cartSlice = createSlice({
       }
       item.total -= action.payload.price;
       state.totalQuantity -= 1;
+      state.isChanged = true;
     },
   },
 });
