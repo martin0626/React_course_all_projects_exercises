@@ -3,12 +3,12 @@ import QuoteList from "../components/quotes/QuoteList";
 let DUMMY_QUOTES = [
   {
     id: "q1",
-    author: "Martin",
+    author: "Martinaa",
     text: "React is Fun",
   },
   {
-    id: "q2",
-    author: "Martin",
+    id: "a2",
+    author: "Martincho",
     text: "React is Fun",
   },
   {
