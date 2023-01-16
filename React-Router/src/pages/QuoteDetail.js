@@ -1,38 +1,30 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Route, useParams } from "react-router-dom";
 import Comments from "../components/comments/Comments";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
-
-let DUMMY_QUOTES = [
-  {
-    id: "q1",
-    author: "Martin",
-    text: "React is Fun",
-  },
-  {
-    id: "q2",
-    author: "Martin",
-    text: "Diff Check",
-  },
-  {
-    id: "q3",
-    author: "Martin",
-    text: "React is Fun",
-  },
-];
+import useHttp from "../hooks/use-http";
+import { getSingleQuote } from "../lib/api";
 
 const QuoteDetail = () => {
-  let quotesId = useParams().quoteId;
+  let quoteId = useParams().quoteId;
+  const {
+    sendRequest,
+    status,
+    data: loadedQuote,
+    error,
+  } = useHttp(getSingleQuote, true);
 
-  let quote = DUMMY_QUOTES.find((quote) => quote.id === quotesId);
+  useEffect(() => {
+    sendRequest(quoteId);
+  }, [sendRequest, quoteId]);
 
-  if (!quote) {
+  if (!loadedQuote) {
     return;
   }
   return (
     <Fragment>
-      <HighlightedQuote text={quote.text} author={quote.author} />
-      <Route path={`/quotes/${quotesId}/comment`}>
+      <HighlightedQuote text={loadedQuote.text} author={loadedQuote.author} />
+      <Route path={`/quotes/${quoteId}/comment`}>
         <Comments></Comments>
       </Route>
     </Fragment>
