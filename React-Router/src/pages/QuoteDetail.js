@@ -7,12 +7,7 @@ import { getSingleQuote } from "../lib/api";
 
 const QuoteDetail = () => {
   let quoteId = useParams().quoteId;
-  const {
-    sendRequest,
-    status,
-    data: loadedQuote,
-    error,
-  } = useHttp(getSingleQuote, true);
+  const { sendRequest, data: loadedQuote } = useHttp(getSingleQuote, true);
 
   useEffect(() => {
     sendRequest(quoteId);

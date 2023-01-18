@@ -5,23 +5,23 @@ import useHttp from "../hooks/use-http";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import NoQuotesFound from "../components/quotes/NoQuotesFound";
 
-let DUMMY_QUOTES = [
-  {
-    id: "q1",
-    author: "Martinaa",
-    text: "React is Fun",
-  },
-  {
-    id: "a2",
-    author: "Martincho",
-    text: "React is Fun",
-  },
-  {
-    id: "q3",
-    author: "Martin",
-    text: "React is Fun",
-  },
-];
+// let DUMMY_QUOTES = [
+//   {
+//     id: "q1",
+//     author: "Martinaa",
+//     text: "React is Fun",
+//   },
+//   {
+//     id: "a2",
+//     author: "Martincho",
+//     text: "React is Fun",
+//   },
+//   {
+//     id: "q3",
+//     author: "Martin",
+//     text: "React is Fun",
+//   },
+// ];
 
 const AllQuotes = () => {
   const {
@@ -50,8 +50,6 @@ const AllQuotes = () => {
   if (status === "completed" && (!loadedQuotes || loadedQuotes.length === 0)) {
     return <NoQuotesFound />;
   }
-
-  console.log(loadedQuotes);
 
   return <QuoteList quotes={loadedQuotes}></QuoteList>;
 };
