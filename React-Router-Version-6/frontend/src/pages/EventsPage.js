@@ -1,25 +1,28 @@
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
-
-let DUMMY_EVENTS = [
-  { name: "Event 1", id: "E1" },
-  { name: "Event 2", id: "E2" },
-  { name: "Event 3", id: "E3" },
-];
+import { useLoaderData } from "react-router-dom";
+import EventsList from "../components/EventsList";
 
 let Events = () => {
+  let events = useLoaderData();
+
   return (
     <Fragment>
-      <h1>Events</h1>
-      {DUMMY_EVENTS.map((event) => {
-        return (
-          <li>
-            <Link to={event.id}>{event.name}</Link>
-          </li>
-        );
-      })}
+      <EventsList events={events} />
     </Fragment>
   );
 };
 
 export default Events;
+
+export const loaderEvents = async () => {
+  let request = await fetch("http://localhost:8080/events");
+
+  if (!request.ok) {
+    throw new Response(
+      JSON.stringify({ message: "Could not fetch events" }, { status: 500 })
+    );
+  } else {
+    let response = await request.json();
+    return response.events;
+  }
+};
