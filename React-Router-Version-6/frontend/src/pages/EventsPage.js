@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { useLoaderData } from "react-router-dom";
+import { json, useLoaderData } from "react-router-dom";
 import EventsList from "../components/EventsList";
 
 let Events = () => {
@@ -18,9 +18,7 @@ export const loaderEvents = async () => {
   let request = await fetch("http://localhost:8080/events");
 
   if (!request.ok) {
-    throw new Response(
-      JSON.stringify({ message: "Could not fetch events" }, { status: 500 })
-    );
+    throw json({ message: "Could not fetch events." }, { status: 500 });
   } else {
     let response = await request.json();
     return response.events;

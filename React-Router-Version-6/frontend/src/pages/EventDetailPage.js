@@ -1,19 +1,22 @@
 import { Fragment } from "react";
-import { Link, useParams } from "react-router-dom";
+import { json, Link, useRouteLoaderData, useParams } from "react-router-dom";
+import EventItem from "../components/EventItem";
 
 let EventDetails = () => {
-  const event = useParams().eventId;
-
-  return (
-    <Fragment>
-      <h1>{event}</h1>
-      <button>
-        <Link to=".." relative="path">
-          Go Back
-        </Link>
-      </button>
-    </Fragment>
-  );
+  let loader = useRouteLoaderData("event-data");
+  return <EventItem event={loader.event} />;
 };
 
 export default EventDetails;
+
+export const eventLoader = async ({ request, params }) => {
+  let requestData = await fetch(
+    "http://localhost:8080/events/" + params.eventId
+  );
+
+  if (!requestData.ok) {
+    throw json({ message: "Event is Not Found!" }, { status: 500 });
+  } else {
+    return requestData;
+  }
+};

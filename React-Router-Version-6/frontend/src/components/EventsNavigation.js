@@ -1,4 +1,4 @@
-import classes from './EventsNavigation.module.css';
+import classes from "./EventsNavigation.module.css";
 
 function EventsNavigation() {
   return (
@@ -9,7 +9,7 @@ function EventsNavigation() {
             <a href="/events">All Events</a>
           </li>
           <li>
-            <a href="/events/new">New Event</a>
+            <a href="new">New Event</a>
           </li>
         </ul>
       </nav>

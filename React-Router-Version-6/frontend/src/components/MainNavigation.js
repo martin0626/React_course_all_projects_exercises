@@ -10,6 +10,7 @@ function MainNavigation() {
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? classes.active : "")}
+              end
             >
               Home
             </NavLink>
@@ -18,6 +19,7 @@ function MainNavigation() {
             <NavLink
               to="/events"
               className={({ isActive }) => (isActive ? classes.active : "")}
+              end
             >
               Events
             </NavLink>
@@ -26,6 +28,7 @@ function MainNavigation() {
             <NavLink
               to="/events/event/new"
               className={({ isActive }) => (isActive ? classes.active : "")}
+              end
             >
               Add Event
             </NavLink>
