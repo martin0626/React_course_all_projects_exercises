@@ -1,5 +1,11 @@
 import { Fragment } from "react";
-import { json, Link, useRouteLoaderData, useParams } from "react-router-dom";
+import {
+  json,
+  Link,
+  useRouteLoaderData,
+  useParams,
+  redirect,
+} from "react-router-dom";
 import EventItem from "../components/EventItem";
 
 let EventDetails = () => {
@@ -18,5 +24,18 @@ export const eventLoader = async ({ request, params }) => {
     throw json({ message: "Event is Not Found!" }, { status: 500 });
   } else {
     return requestData;
+  }
+};
+
+export let eventsDeleteAction = async ({ request, params }) => {
+  let eventId = params.eventId;
+  const response = await fetch("http://localhost:8080/events/" + eventId, {
+    method: request.method,
+  });
+
+  if (!response.ok) {
+    throw json({ message: "Couldn't delete event." }, { status: 500 });
+  } else {
+    return redirect("/events");
   }
 };
