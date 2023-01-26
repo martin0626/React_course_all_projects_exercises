@@ -10,7 +10,7 @@ import EventsPage, { loader as eventsLoader } from "./pages/Events";
 import EventsRootLayout from "./pages/EventsRoot";
 import HomePage from "./pages/Home";
 import NewEventPage from "./pages/NewEvent";
-import RootLayout from "./pages/Root";
+import RootLayout, { rootLoader } from "./pages/Root";
 import {
   action,
   action as manipulateEventAction,
@@ -19,12 +19,16 @@ import NewsletterPage, { action as newsletterAction } from "./pages/Newsletter";
 import AuthenticationPage, {
   action as authAction,
 } from "./pages/Authentication";
+import logoutAction from "./pages/Logout";
+import { checkAuthLoader } from "./util/getToken";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    loader: rootLoader,
+    id: "root",
     children: [
       { index: true, element: <HomePage /> },
       {
@@ -50,6 +54,7 @@ const router = createBrowserRouter([
                 path: "edit",
                 element: <EditEventPage />,
                 action: manipulateEventAction,
+                loader: checkAuthLoader,
               },
             ],
           },
@@ -57,6 +62,7 @@ const router = createBrowserRouter([
             path: "new",
             element: <NewEventPage />,
             action: manipulateEventAction,
+            loader: checkAuthLoader,
           },
         ],
       },
@@ -70,6 +76,7 @@ const router = createBrowserRouter([
         element: <AuthenticationPage />,
         action: authAction,
       },
+      { path: "logout", action: logoutAction },
     ],
   },
 ]);
