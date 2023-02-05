@@ -1,12 +1,20 @@
-import { Fragment } from "react/cjs/react.production.min";
+import { useState } from "react";
 
-const Greetings = () => {
+const Greeting = () => {
+  const [changedText, setChangedText] = useState(false);
+
+  const changeTextHandler = () => {
+    setChangedText(true);
+  };
+
   return (
-    <Fragment>
-      <h1>Hello World!</h1>
-      <p>Greetings!</p>
-    </Fragment>
+    <div>
+      <h2>Hello World!</h2>
+      {!changedText && <p>It's good to see you!</p>}
+      {changedText && <p>Changed!</p>}
+      <button onClick={changeTextHandler}>Change Text!</button>
+    </div>
   );
 };
 
-export default Greetings;
+export default Greeting;
