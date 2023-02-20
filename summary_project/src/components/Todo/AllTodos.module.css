@@ -1,0 +1,7 @@
+.todos {
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
+  margin: 0 32rem;
+  transition: all 0.4s;
+}

@@ -5,7 +5,6 @@ const NewTodoForm = () => {
     <Form method="post">
       <label htmlFor="todo">Todo</label>
       <input id="todo" name="todo" type="text" required></input>
-
       <button type="submit">Create</button>
     </Form>
   );

@@ -1,0 +1,16 @@
+.todo {
+  background-color: antiquewhite;
+  padding: 22px;
+  color: #333;
+  border: solid 2px #333;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px #333;
+  list-style: none;
+}
+.todo:active,
+.todo:hover {
+  transition: all 0.4s;
+  transform: translateY(-10%);
+  box-shadow: 7px 10px 7px #333;
+  cursor: pointer;
+}

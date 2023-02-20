@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { useLoaderData } from "react-router-dom";
-import AllTodos from "../components/AllTodos";
+import AllTodos from "../components/Todo/AllTodos";
 
 const TodoPage = () => {
   const todos = useLoaderData();
