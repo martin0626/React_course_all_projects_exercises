@@ -1,11 +1,14 @@
 import { Form } from "react-router-dom";
+import classes from "./NewTodoForm.module.css";
 
 const NewTodoForm = () => {
   return (
-    <Form method="post">
+    <Form className={classes.form} method="post">
       <label htmlFor="todo">Todo</label>
       <input id="todo" name="todo" type="text" required></input>
-      <button type="submit">Create</button>
+      <button className={classes.button} type="submit">
+        Create
+      </button>
     </Form>
   );
 };

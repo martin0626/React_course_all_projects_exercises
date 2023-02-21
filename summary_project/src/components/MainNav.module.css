@@ -12,16 +12,16 @@
 
 .navigation li a {
   text-decoration: none;
-  color: white;
+  color: #aaa;
   transition: all 0.2s;
 }
 
 .navigation li a.active,
 .navigation li a:hover {
   cursor: pointer;
-  color: #aaa;
+  color: white;
 }
 
 .active {
-  color: #aaa;
+  color: white;
 }

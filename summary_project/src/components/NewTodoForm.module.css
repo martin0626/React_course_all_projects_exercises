@@ -1,0 +1,29 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 0 38rem;
+  padding: 22px;
+  border-radius: 8px;
+  box-shadow: 10px 10px 10px #252525;
+}
+
+.form input {
+  font-size: 28px;
+  border: 3px solid #333;
+  border-radius: 8px;
+}
+
+.button {
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 22px;
+}
+
+.button:active,
+.button:hover {
+  transition: all 0.4s;
+  cursor: pointer;
+  transform: translateY(-0.2rem);
+}

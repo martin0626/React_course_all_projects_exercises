@@ -15,6 +15,11 @@ export default NewTodoPage;
 export const action = async ({ request, params }) => {
   let data = await request.formData();
   let text = data.get("todo");
+
+  if (text.trim() === "") {
+    return redirect("/new");
+  }
+
   let todo = {
     id: Math.random(),
     text: text,
