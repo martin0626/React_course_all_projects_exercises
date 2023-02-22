@@ -25,7 +25,7 @@
   color: whitesmoke;
   background-color: #495057;
   padding: 8px 16px;
-  border: 1px solid #333;
+  border: 2px solid #333;
   border-radius: 8px;
 }
 
@@ -36,9 +36,10 @@
   margin-inline: 20%;
 }
 
-.btn-group a:active,
-.btn-group a:hover {
+.btn-group button:active,
+.btn-group button:hover {
   background-color: #212529;
+  cursor: pointer;
 }
 
 .text {

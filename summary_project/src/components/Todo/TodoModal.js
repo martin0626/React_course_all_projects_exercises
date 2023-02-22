@@ -31,13 +31,17 @@ const TodoModal = (props) => {
         </div>
 
         <div className={classes["btn-group"]}>
-          <a className={classes.button} href="#" onClick={props.closeModal}>
+          <button
+            className={classes.button}
+            href="#"
+            onClick={props.closeModal}
+          >
             Close
-          </a>
-          <a className={classes.button} href="#" onClick={onActionHandler}>
-            Mark As Done
-          </a>
-          <a
+          </button>
+          <button className={classes.button} href="#" onClick={onActionHandler}>
+            {todoInfo.isDone ? "Mark as Not Done" : "Mark As Done"}
+          </button>
+          <button
             className={classes.button}
             href="#"
             onClick={() => {
@@ -45,7 +49,7 @@ const TodoModal = (props) => {
             }}
           >
             Delete
-          </a>
+          </button>
         </div>
       </div>
     </div>

@@ -3,15 +3,21 @@
   flex-direction: column;
   gap: 28px;
   margin: 0 38rem;
-  padding: 22px;
+  padding: 48px;
   border-radius: 8px;
   box-shadow: 10px 10px 10px #252525;
 }
 
-.form input {
-  font-size: 28px;
-  border: 3px solid #333;
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field {
+  font-size: 18px;
+  border: 1px solid #333;
   border-radius: 8px;
+  padding: 12px 22px;
 }
 
 .button {

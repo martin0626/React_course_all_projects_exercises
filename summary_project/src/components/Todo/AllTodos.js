@@ -6,12 +6,10 @@ import TodoModal from "./TodoModal";
 const AllTodos = (params) => {
   const todosObj = params.todos;
 
-  const [modalOpen, setModal] = useState(false);
   const [todos, setTodos] = useState(todosObj);
   const [modalElement, setModalElement] = useState("");
 
   const closeModalHandler = () => {
-    setModal(false);
     setModalElement("");
   };
 
@@ -35,7 +33,6 @@ const AllTodos = (params) => {
   };
 
   const openModalHandler = (key) => {
-    setModal(true);
     let currTodo = todos.find((el) => el.id === key);
     setModalElement(
       <TodoModal

@@ -4,8 +4,17 @@ import classes from "./NewTodoForm.module.css";
 const NewTodoForm = () => {
   return (
     <Form className={classes.form} method="post">
-      <label htmlFor="todo">Todo</label>
-      <input id="todo" name="todo" type="text" required></input>
+      <div className={classes.input}>
+        <label htmlFor="todo">Todo</label>
+        <input
+          className={classes["input-field"]}
+          id="todo"
+          name="todo"
+          type="text"
+          required
+        ></input>
+      </div>
+
       <button className={classes.button} type="submit">
         Create
       </button>
