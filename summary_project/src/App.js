@@ -4,6 +4,7 @@ import RootLayout from "./pages/RootLayout";
 import TodoPage from "./pages/TodoPage";
 import { action as newTodoAction } from "./pages/NewTodoPage";
 import { loader as todosLoader } from "./pages/TodoPage";
+import ImportantPage from "./pages/ImportanTodosPage";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
         path: "/new",
         element: <NewTodoPage />,
         action: newTodoAction,
+      },
+      {
+        path: "/important",
+        element: <ImportantPage />,
       },
     ],
   },

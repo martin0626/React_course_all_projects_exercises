@@ -22,6 +22,14 @@ const MainNav = () => {
           New Todo
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/important"
+          className={({ isActive }) => (isActive ? classes.active : "")}
+        >
+          Important
+        </NavLink>
+      </li>
     </nav>
   );
 };

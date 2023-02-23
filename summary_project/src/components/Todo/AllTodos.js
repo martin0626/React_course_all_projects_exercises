@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import classes from "./AllTodos.module.css";
 import TodoElement from "./TodoElement";
 import TodoModal from "./TodoModal";

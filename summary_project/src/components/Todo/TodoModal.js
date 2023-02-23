@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { importantActions } from "../../store/important";
 import classes from "./TodoModal.module.css";
 
 const TodoModal = (props) => {
+  const dispatch = useDispatch();
+
   const [todoInfo, setTodo] = useState(props.todo);
   // let todoInfo = props.todo;
   const onActionHandler = () => {
@@ -12,6 +16,11 @@ const TodoModal = (props) => {
     };
     setTodo(newTodo);
     props.actionTodo(todoInfo.id);
+  };
+
+  const addToImportantHandler = () => {
+    dispatch(importantActions.addItemToImportant(todoInfo));
+    console.log("ASD");
   };
 
   return (
@@ -38,8 +47,11 @@ const TodoModal = (props) => {
           >
             Close
           </button>
-          <button className={classes.button} href="#" onClick={onActionHandler}>
+          <button className={classes.button} onClick={onActionHandler}>
             {todoInfo.isDone ? "Mark as Not Done" : "Mark As Done"}
+          </button>
+          <button className={classes.button} onClick={addToImportantHandler}>
+            Mark As Important
           </button>
           <button
             className={classes.button}
