@@ -7,6 +7,9 @@ const importantSlice = createSlice({
     quantity: 0,
   },
   reducers: {
+    replaceTodos(state, action) {
+      state.impTodos = action.payload;
+    },
     addItemToImportant(state, action) {
       state.quantity += 1;
       const newItem = action.payload;

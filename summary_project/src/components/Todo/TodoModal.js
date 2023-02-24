@@ -5,9 +5,7 @@ import classes from "./TodoModal.module.css";
 
 const TodoModal = (props) => {
   const dispatch = useDispatch();
-
   const [todoInfo, setTodo] = useState(props.todo);
-  // let todoInfo = props.todo;
   const onActionHandler = () => {
     let newTodo = {
       text: todoInfo.text,
