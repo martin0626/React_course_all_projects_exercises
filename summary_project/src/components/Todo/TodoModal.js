@@ -6,6 +6,7 @@ import classes from "./TodoModal.module.css";
 const TodoModal = (props) => {
   const dispatch = useDispatch();
   const [todoInfo, setTodo] = useState(props.todo);
+
   const onActionHandler = () => {
     let newTodo = {
       text: todoInfo.text,
@@ -17,6 +18,7 @@ const TodoModal = (props) => {
   };
 
   const addToImportantHandler = () => {
+    console.log(todoInfo);
     dispatch(importantActions.addItemToImportant(todoInfo));
     console.log("ASD");
   };
