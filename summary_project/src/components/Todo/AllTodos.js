@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { todosAction } from "../../store/todos";
 import classes from "./AllTodos.module.css";
@@ -38,24 +38,6 @@ const AllTodos = (params) => {
       />
     );
   };
-
-  useEffect(() => {
-    const replaceTodos = async () => {
-      await fetch(
-        "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Todos.json",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(todosObj),
-        }
-      );
-    };
-
-    // TODO Fix Reload Bug
-    replaceTodos();
-  }, [todoActionHandler, deleteTodoHandler]);
 
   return (
     <section className={classes.todos}>

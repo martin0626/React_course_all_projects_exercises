@@ -12,7 +12,7 @@ const TodoElement = (props) => {
         todo.isDone ? classes.done : classes["not-done"]
       }`}
     >
-      <li>{todo.text}</li>{" "}
+      <li key={todo.id}>{todo.text}</li>{" "}
       {todo.isDone ? <span>&#10004;</span> : <span>&#10006;</span>}
     </div>
   );

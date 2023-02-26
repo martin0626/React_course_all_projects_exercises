@@ -5,7 +5,7 @@ const { Fragment } = require("react");
 
 const ImportantTodos = () => {
   const todos = useSelector((state) => state.important.impTodos);
-
+  console.log(todos);
   return (
     <Fragment>
       {todos.length === 0 && <h1>No Important Todos Yet</h1>}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { importantActions } from "../../store/important";
 import classes from "./TodoModal.module.css";
+import { todosAction } from "../../store/todos";
 
 const TodoModal = (props) => {
   const dispatch = useDispatch();
@@ -17,10 +18,8 @@ const TodoModal = (props) => {
     props.actionTodo(todoInfo.id);
   };
 
-  const addToImportantHandler = () => {
-    console.log(todoInfo);
+  const addToImportantHandler = async () => {
     dispatch(importantActions.addItemToImportant(todoInfo));
-    console.log("ASD");
   };
 
   return (

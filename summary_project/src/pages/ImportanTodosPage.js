@@ -16,7 +16,9 @@ const ImportantPage = () => {
         "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Importants.json"
       );
       let data = await request.json();
-      dispatch(importantActions.replaceTodos(data ? data : []));
+      let todos = Object.values(data);
+
+      dispatch(importantActions.replaceTodos(todos ? todos : []));
     };
 
     if (isInitial) {
@@ -30,18 +32,19 @@ const ImportantPage = () => {
       return;
     }
     const updateImportants = async () => {
-      fetch(
+      await fetch(
         "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Importants.json",
         {
           method: "PUT",
-          body: importantTodos,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(importantTodos),
         }
       );
     };
 
-    if (importantTodos.length > 0) {
-      updateImportants();
-    }
+    updateImportants();
   }, [importantTodos]);
 
   return <ImportantTodos></ImportantTodos>;
