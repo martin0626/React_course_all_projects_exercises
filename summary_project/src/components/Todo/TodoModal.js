@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { importantActions } from "../../store/important";
 import classes from "./TodoModal.module.css";
-import { todosAction } from "../../store/todos";
 
 const TodoModal = (props) => {
   const dispatch = useDispatch();

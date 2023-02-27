@@ -9,7 +9,7 @@ const ImportantPage = () => {
   const importantTodos = useSelector((state) => state.important.impTodos);
   const dispatch = useDispatch();
 
-  // TODO Move Fetching Code In Side Effect and Fixing Reload Problem on Importants Elements
+  // TODO Move Fetching Code In Side Effect and Fixing Reload Problem on Importants Elements - FIXED
   useEffect(() => {
     const getImportants = async () => {
       let request = await fetch(

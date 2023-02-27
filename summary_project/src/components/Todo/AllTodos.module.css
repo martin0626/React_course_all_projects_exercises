@@ -5,3 +5,26 @@
   margin: 0 32rem;
   transition: all 0.4s;
 }
+
+.create {
+  background-color: #333;
+  display: inline-block;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  align-self: center;
+  position: relative;
+}
+
+.create span {
+  position: absolute;
+  font-size: 64px;
+  top: 30%;
+  left: 0;
+  right: 0;
+}
+
+.create:active,
+.create:hover {
+  cursor: pointer;
+}

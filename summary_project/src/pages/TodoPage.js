@@ -1,11 +1,11 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLoaderData } from "react-router-dom";
 import AllTodos from "../components/Todo/AllTodos";
 import { todosAction } from "../store/todos";
 
+let isInitial = true;
+
 const TodoPage = () => {
-  // const todos = useLoaderData();
   const todosRedux = useSelector((state) => state.todos.todos);
   const dispatch = useDispatch();
 
@@ -42,7 +42,11 @@ const TodoPage = () => {
       );
     };
 
-    // TODO Fix Reload Bug
+    // TODO Fix Reload Bug - FIXED
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
     replaceTodos();
   }, [todosRedux]);
 
