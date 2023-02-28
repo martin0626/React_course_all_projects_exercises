@@ -1,11 +1,11 @@
 import { Fragment } from "react";
 import { redirect } from "react-router-dom";
-import NewTodoForm from "../components/NewTodoForm";
+import TodoModal from "../components/NewTodo/NewTodoForm";
 
 let NewTodoPage = () => {
   return (
     <Fragment>
-      <NewTodoForm></NewTodoForm>
+      <TodoModal></TodoModal>
     </Fragment>
   );
 };

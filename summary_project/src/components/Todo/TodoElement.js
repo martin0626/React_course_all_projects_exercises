@@ -5,9 +5,6 @@ const TodoElement = (props) => {
   return (
     <div
       key={todo.id}
-      // onClick={() => {
-      //   props.openModalHandler(todo.id);
-      // }}
       className={`${classes.todo} ${
         todo.isDone ? classes.done : classes["not-done"]
       }`}

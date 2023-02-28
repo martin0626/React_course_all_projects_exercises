@@ -7,13 +7,15 @@
 }
 
 .create {
-  background-color: #333;
+  background-color: #ffdeeb32;
+  color: #ced4da;
   display: inline-block;
   border-radius: 50%;
   width: 60px;
   height: 60px;
   align-self: center;
   position: relative;
+  transition: all 0.4s;
 }
 
 .create span {
@@ -27,4 +29,5 @@
 .create:active,
 .create:hover {
   cursor: pointer;
+  color: #f8f9fa;
 }

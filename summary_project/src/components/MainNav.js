@@ -13,7 +13,7 @@ const MainNav = () => {
           Todos
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink
           to="/new"
           className={({ isActive }) => (isActive ? classes.active : "")}
@@ -21,7 +21,7 @@ const MainNav = () => {
         >
           New Todo
         </NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink
           to="/important"

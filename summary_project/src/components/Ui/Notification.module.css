@@ -1,0 +1,35 @@
+.container {
+  color: #333;
+  padding: 6px;
+  border-radius: 12px;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 25%;
+  width: 50%;
+  animation: notification 0.6s ease-in forwards;
+  /* animation-name: notifcation;
+  animation-duration: 4s; */
+}
+
+@keyframes notification {
+  0% {
+    transform: translateY(-200%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.success {
+  background-color: #b2f2bb;
+}
+
+.alert {
+  background-color: red;
+}
+
+.pending {
+  background-color: yellow;
+}
