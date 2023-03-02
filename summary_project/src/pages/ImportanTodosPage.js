@@ -6,46 +6,34 @@ import { importantActions } from "../store/important";
 let isInitial = true;
 
 const ImportantPage = () => {
-  const importantTodos = useSelector((state) => state.important.impTodos);
+  // const importantTodos = useSelector((state) => state.important.impTodos);
+  const allTodos = useSelector((state) => state.todos.todos);
   const dispatch = useDispatch();
 
-  // TODO Move Fetching Code In Side Effect and Fixing Reload Problem on Importants Elements - FIXED
   useEffect(() => {
-    const getImportants = async () => {
-      let request = await fetch(
-        "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Importants.json"
-      );
-      let data = await request.json();
-      let todos = Object.values(data);
-
-      dispatch(importantActions.replaceTodos(todos ? todos : []));
-    };
-
-    if (isInitial) {
-      getImportants();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
-    }
-    const updateImportants = async () => {
+    const replaceTodos = async () => {
       await fetch(
-        "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Importants.json",
+        "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Todos.json",
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(importantTodos),
+          body: JSON.stringify(allTodos),
         }
       );
     };
 
-    updateImportants();
-  }, [importantTodos]);
+    // TODO Fix Reload Bug - FIXED
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+    console.log(allTodos);
+    let todos = allTodos.filter((el) => el.isImportant === true);
+    dispatch(importantActions.replaceTodos(todos ? todos : []));
+    replaceTodos();
+  }, [allTodos]);
 
   return <ImportantTodos></ImportantTodos>;
 };

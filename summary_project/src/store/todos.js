@@ -23,6 +23,22 @@ const todosSlice = createSlice({
       state.todos = state.todos.filter((el) => el.id !== action.payload);
       state.totalQuantity -= 1;
     },
+    addToImportants(state, action) {
+      state.todos = state.todos.map((el) => {
+        if (el.id === action.payload) {
+          el.isImportant = true;
+        }
+        return el;
+      });
+    },
+    removeFromImportants(state, action) {
+      state.todos = state.todos.map((el) => {
+        if (el.id === action.payload) {
+          el.isImportant = false;
+        }
+        return el;
+      });
+    },
   },
 });
 

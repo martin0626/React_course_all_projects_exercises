@@ -7,8 +7,9 @@ let isInitial = true;
 
 const TodoPage = () => {
   const todosRedux = useSelector((state) => state.todos.todos);
-  const dispatch = useDispatch();
+  let dispatch = useDispatch();
 
+  // TODO Move To Side Effect
   useEffect(() => {
     const getData = async () => {
       let req = await fetch(
@@ -26,6 +27,7 @@ const TodoPage = () => {
     };
 
     getData();
+    console.log("loading");
   }, []);
 
   useEffect(() => {

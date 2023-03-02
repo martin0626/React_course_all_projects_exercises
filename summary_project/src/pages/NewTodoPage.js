@@ -24,6 +24,7 @@ export const action = async ({ request, params }) => {
     id: Math.random(),
     text: text,
     isDone: false,
+    isImportant: false,
   };
 
   const requestData = await fetch(

@@ -30,7 +30,8 @@ const AllTodos = (params) => {
   };
 
   const addToImportantHandler = async (todo) => {
-    dispatch(importantActions.addItemToImportant(todo));
+    // dispatch(importantActions.addItemToImportant(todo));
+
     dispatch(
       uiActions.showNotification({
         status: "success",
@@ -38,6 +39,7 @@ const AllTodos = (params) => {
         message: "You added this todo to Important section!",
       })
     );
+    dispatch(todosAction.addToImportants(todo.id));
   };
 
   return (

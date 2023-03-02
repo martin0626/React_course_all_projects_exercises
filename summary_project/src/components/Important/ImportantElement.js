@@ -1,11 +1,12 @@
 import { useDispatch } from "react-redux";
 import { importantActions } from "../../store/important";
+import { todosAction } from "../../store/todos";
 
 const ImportantElement = (props) => {
   const todo = props.todo;
   const dispatch = useDispatch();
   const deleteFromImpHandler = () => {
-    dispatch(importantActions.removeItem(todo.id));
+    dispatch(todosAction.removeFromImportants(todo.id));
   };
   return (
     <div>
