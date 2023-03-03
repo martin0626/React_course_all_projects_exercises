@@ -1,0 +1,18 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
+  margin: 8rem 32rem;
+  transition: all 0.4s;
+  animation: todosList 0.5s ease-in forwards;
+}
+
+@keyframes todosList {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

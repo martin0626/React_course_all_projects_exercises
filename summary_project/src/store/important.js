@@ -9,6 +9,7 @@ const importantSlice = createSlice({
   reducers: {
     replaceTodos(state, action) {
       state.impTodos = action.payload;
+      state.quantity = action.payload.length;
     },
     addItemToImportant(state, action) {
       state.quantity += 1;

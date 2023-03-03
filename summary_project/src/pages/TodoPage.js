@@ -1,6 +1,7 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AllTodos from "../components/Todo/AllTodos";
+import { importantActions } from "../store/important";
 import { todosAction } from "../store/todos";
 
 let isInitial = true;
@@ -27,7 +28,6 @@ const TodoPage = () => {
     };
 
     getData();
-    console.log("loading");
   }, []);
 
   useEffect(() => {
@@ -50,6 +50,8 @@ const TodoPage = () => {
       return;
     }
     replaceTodos();
+    let todos = todosRedux.filter((el) => el.isImportant === true);
+    dispatch(importantActions.replaceTodos(todos ? todos : []));
   }, [todosRedux]);
 
   return (

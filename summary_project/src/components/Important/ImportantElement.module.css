@@ -1,0 +1,49 @@
+.todo {
+  /* padding: 22px; */
+  font-size: 18px;
+  color: #333;
+  border: solid 2px #333;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px #333;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  overflow: hidden;
+  align-items: center;
+  position: relative;
+  transition: all 0.4s;
+}
+
+.action-todo:active,
+.action-todo:hover {
+  transition: all 0.4s;
+  cursor: pointer;
+  color: red;
+}
+
+.add-todo:active,
+.add-todo:hover {
+  cursor: pointer;
+}
+
+.done {
+  background-color: #b2f2bb;
+}
+
+.not-done {
+  background-color: #ffc9c9;
+}
+
+.text-todo,
+.action-todo,
+.add-todo {
+  padding: 22px;
+}
+
+.text-todo {
+  flex-grow: 1;
+}
+
+span {
+  font-size: 28px;
+}
