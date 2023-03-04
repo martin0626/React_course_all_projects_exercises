@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 22px;
-  margin: 0 32rem;
+  margin: 0 32rem 2rem 32rem;
   transition: all 1s;
   animation: todosList 0.5s ease-in forwards;
 }

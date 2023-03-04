@@ -42,5 +42,21 @@ const todosSlice = createSlice({
   },
 });
 
+//Action Creator Trunk
+export const sendTodosData = (todos) => {
+  return async (dispatch) => {
+    let request = await fetch(
+      "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Todos.json",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(todos),
+      }
+    );
+  };
+};
+
 export const todosAction = todosSlice.actions;
 export default todosSlice;

@@ -1,5 +1,6 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLoaderData } from "react-router-dom";
 import AllTodos from "../components/Todo/AllTodos";
 import { importantActions } from "../store/important";
 import { todosAction } from "../store/todos";
@@ -9,25 +10,10 @@ let isInitial = true;
 const TodoPage = () => {
   const todosRedux = useSelector((state) => state.todos.todos);
   let dispatch = useDispatch();
+  let loadedTodos = useLoaderData();
 
-  // TODO Move To Side Effect
   useEffect(() => {
-    const getData = async () => {
-      let req = await fetch(
-        "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Todos.json"
-      );
-      let data = await req.json();
-      let todos = [];
-      if (data) {
-        Object.values(data).forEach((element) => {
-          todos.push(element);
-        });
-      }
-
-      dispatch(todosAction.setAllTodos(todos));
-    };
-
-    getData();
+    dispatch(todosAction.setAllTodos(loadedTodos));
   }, []);
 
   useEffect(() => {
