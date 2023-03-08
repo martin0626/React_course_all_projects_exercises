@@ -43,7 +43,7 @@ const todosSlice = createSlice({
 });
 
 //Action Creator Trunk
-export const sendTodosData = (todos) => {
+export const replaceTodosData = (todos) => {
   return async (dispatch) => {
     let request = await fetch(
       "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Todos.json",

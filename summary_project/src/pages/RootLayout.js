@@ -9,7 +9,6 @@ import { uiActions } from "../store/ui-slice";
 
 const RootLayout = () => {
   const notification = useSelector((state) => state.ui.notification);
-  const todos = useSelector((state) => state.todos.todos);
   const dispatch = useDispatch();
 
   useEffect(() => {

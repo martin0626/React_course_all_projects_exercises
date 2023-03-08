@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLoaderData } from "react-router-dom";
 import AllTodos from "../components/Todo/AllTodos";
 import { importantActions } from "../store/important";
-import { todosAction } from "../store/todos";
+import { todosAction, replaceTodosData } from "../store/todos";
 
 let isInitial = true;
 
@@ -17,25 +17,14 @@ const TodoPage = () => {
   }, []);
 
   useEffect(() => {
-    const replaceTodos = async () => {
-      await fetch(
-        "https://jstest-47ca2-default-rtdb.europe-west1.firebasedatabase.app/Todos.json",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(todosRedux),
-        }
-      );
-    };
-
     // TODO Fix Reload Bug - FIXED
     if (isInitial) {
       isInitial = false;
       return;
     }
-    replaceTodos();
+
+    dispatch(replaceTodosData(todosRedux));
+
     let todos = todosRedux.filter((el) => el.isImportant === true);
     dispatch(importantActions.replaceTodos(todos ? todos : []));
   }, [todosRedux]);
