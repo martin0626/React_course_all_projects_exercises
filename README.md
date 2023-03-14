@@ -17,6 +17,7 @@ This is Simple TODO App, where I practice some of the most important skills I ha
 - [x] React Router
 - [x] Redux
 - [x] Redux Toolkit
+- [x] Firebase Realtime Database
 
 <h1 align="center"><a href="https://github.com/martin0626/React_course_all_projects_exercises/tree/main/summary_project">See Project Code</a></h1>
 
