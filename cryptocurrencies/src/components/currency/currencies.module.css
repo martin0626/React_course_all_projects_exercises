@@ -3,4 +3,5 @@
   display: flex;
   flex-direction: column;
   gap: 2.8rem;
+  animation: show 2s ease-in forwards;
 }
