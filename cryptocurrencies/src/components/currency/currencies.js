@@ -1,32 +1,36 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import SingleCurrency from "./singleCurrency";
 import classes from "./currencies.module.css";
-import Loading from "../ui/loading";
+import CurrenciesContext from "../../store/currencies-context";
 
 const Currencies = () => {
-  const [currencies, setCurrencies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const searchParams = new URLSearchParams(document.location.search);
+  const searchedName = searchParams.get("crypto") || "";
+  const [currencies, setCurrencies] = useState(useContext(CurrenciesContext));
 
   useEffect(() => {
-    setIsLoading(true);
-    const fetchCrypto = async () => {
-      const request = await fetch("https://api.coincap.io/v2/assets/");
-      const response = await request.json();
+    if (searchedName.length > 0) {
+      let filteredCurrencies = currencies.filter((currency) => {
+        const regex = new RegExp(`${searchedName}`, "gi");
+        return currency.name.match(regex);
+      });
 
-      setCurrencies(response.data);
-      setIsLoading(false);
-    };
-    setTimeout(() => fetchCrypto(), 1500);
-  }, []);
+      setCurrencies(filteredCurrencies);
+      console.log(filteredCurrencies);
+    }
+  }, [searchedName]);
+
   return (
     <section className={classes["all-currencies"]}>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        currencies.map((currency) => (
-          <SingleCurrency key={currency.id} currency={currency} />
-        ))
+      {currencies.length === 0 && (
+        <div>
+          <h1 className={classes["not-found"]}>No Currency Found</h1>
+          <h2>With Name: {searchedName}</h2>
+        </div>
       )}
+      {currencies.map((currency) => (
+        <SingleCurrency key={currency.id} currency={currency} />
+      ))}
     </section>
   );
 };

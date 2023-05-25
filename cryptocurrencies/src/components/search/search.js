@@ -1,13 +1,68 @@
+import { useContext, useState } from "react";
 import classes from "./search.module.css";
+import CurrenciesContext from "../../store/currencies-context";
 
 const Search = () => {
+  const currencies = useContext(CurrenciesContext);
+  const [matches, setMatches] = useState([]);
+  const [currentText, setCurrentText] = useState("");
+
+  const changeHandler = (e) => {
+    let currentMatches = [];
+    const text = e.target.value;
+    const regEx = new RegExp(`${text}`, "gi");
+
+    if (text.trim() !== "") {
+      currentMatches = currencies.filter((currency) =>
+        currency.name.match(regEx)
+      );
+      setMatches(currentMatches);
+    } else {
+      setMatches([]);
+    }
+    setCurrentText(text);
+  };
+
+  const chooseHandler = (match) => {
+    setCurrentText(match);
+    setMatches([]);
+  };
+
+  const blurHandler = () => {
+    setMatches([]);
+  };
   return (
     <section className={classes.search}>
       <form className={classes["search-form"]}>
-        <input name="crypto" placeholder="Search..."></input>
-        <a className={classes["src-btn"]}>
+        <div className={classes["input-block"]}>
+          <input
+            onChange={changeHandler}
+            name="crypto"
+            placeholder="Search..."
+            value={currentText}
+            onBlur={() => {
+              setTimeout(() => {
+                blurHandler();
+              }, 150);
+            }}
+          ></input>
+          {matches.length > 0 && (
+            <ul className={classes.matches}>
+              {matches.map((match) => (
+                <li
+                  onClick={() => {
+                    chooseHandler(match.name);
+                  }}
+                >
+                  {match.name}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <button type="submit" className={classes["src-btn"]}>
           <i className="fas fa-search"></i>
-        </a>
+        </button>
       </form>
     </section>
   );
