@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 import classes from "./search.module.css";
 import CurrenciesContext from "../../store/currencies-context";
+import { useSearchParams } from "react-router-dom";
 
 const Search = () => {
   const currencies = useContext(CurrenciesContext);
   const [matches, setMatches] = useState([]);
   const [currentText, setCurrentText] = useState("");
+  const [searchParams, setSearcParams] = useSearchParams({});
 
   const changeHandler = (e) => {
     let currentMatches = [];
@@ -31,9 +33,17 @@ const Search = () => {
   const blurHandler = () => {
     setMatches([]);
   };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const searchData = event.target[0].value;
+    if (searchData.trim() !== "") {
+      setSearcParams({ crypto: searchData });
+    }
+  };
   return (
     <section className={classes.search}>
-      <form className={classes["search-form"]}>
+      <form onSubmit={submitHandler} className={classes["search-form"]}>
         <div className={classes["input-block"]}>
           <input
             onChange={changeHandler}

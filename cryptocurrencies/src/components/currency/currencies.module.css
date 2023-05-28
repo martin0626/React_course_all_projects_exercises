@@ -12,3 +12,12 @@
   font-size: 2.4rem;
   letter-spacing: 2px;
 }
+
+.show-currencies-appear {
+  opacity: 0;
+}
+
+.show-currencies-appear-active {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
