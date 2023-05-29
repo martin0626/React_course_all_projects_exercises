@@ -1,5 +1,6 @@
 import { redirect } from "react-router";
 import { useSearchParams } from "react-router-dom";
+import classes from "./showAll.module.css";
 
 const ShowAll = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -7,7 +8,12 @@ const ShowAll = () => {
   const showHandler = () => {
     setSearchParams("");
   };
-  return <a onClick={showHandler}>Show All</a>;
+
+  return (
+    <a className={classes["show-all"]} onClick={showHandler}>
+      All
+    </a>
+  );
 };
 
 export default ShowAll;

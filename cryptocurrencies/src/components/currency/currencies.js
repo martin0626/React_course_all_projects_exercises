@@ -23,6 +23,8 @@ const Currencies = () => {
       });
 
       setCurrencies(filteredCurrencies);
+    } else {
+      setCurrencies(allCurrencies);
     }
 
     setTimeout(() => setIsLoading(false), 500);

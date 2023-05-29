@@ -1,0 +1,18 @@
+.show-all {
+  background-color: #495057;
+  color: #fff;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.5s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.show-all:hover {
+  color: #495057;
+  background-color: #fff;
+  box-shadow: 0 0 0 0.5px #495057;
+}

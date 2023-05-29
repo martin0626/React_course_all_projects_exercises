@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import classes from "./search.module.css";
 import CurrenciesContext from "../../store/currencies-context";
 import { useSearchParams } from "react-router-dom";
+import ShowAll from "./showAll";
 
 const Search = () => {
   const currencies = useContext(CurrenciesContext);
@@ -39,8 +40,10 @@ const Search = () => {
     const searchData = event.target[0].value;
     if (searchData.trim() !== "") {
       setSearcParams({ crypto: searchData });
+      setCurrentText("");
     }
   };
+
   return (
     <section className={classes.search}>
       <form onSubmit={submitHandler} className={classes["search-form"]}>
@@ -71,8 +74,9 @@ const Search = () => {
           )}
         </div>
         <button type="submit" className={classes["src-btn"]}>
-          <i className="fas fa-search"></i>
+          <i className="fa fa-search"></i>
         </button>
+        <ShowAll />
       </form>
     </section>
   );
